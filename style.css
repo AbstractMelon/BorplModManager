@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #444444;
 }
 
 header {
@@ -28,22 +28,27 @@ main {
     justify-content: center;
 }
 
+
 .mod {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 200px;
-    background-color: #fff;
+    background-color: #3f3f3fa5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative; /* Ensure relative positioning for absolute gradient overlay */
 }
 
-.mod img {
-    max-width: 100px;
-    max-height: 100px;
-    margin-bottom: 10px;
+
+.modContent {
+    padding-top: 200px; /* Adjust based on the height of your background image */
 }
+
 
 .actions {
     margin-top: 20px;
@@ -66,11 +71,67 @@ main {
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #1f1f1f25;
+    color: #ffffff;
     text-align: center;
-    padding: 10px 0;
+    padding: 0px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* CSS */
+button {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button:active,
+button:hover {
+  outline: 0;
+}
+
+button span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+button:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  button {
+    font-size: 24px;
+    min-width: 196px;
+  }
+}
+
+.center {
+    align-content: center;
+    align-self: center;
+    text-align: center;
 }

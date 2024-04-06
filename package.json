@@ -1,13 +1,16 @@
 {
-  "name": "mod-manager",
+  "name": "borpl-mod-manager",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "dev": "electron ."
+    "dev": "electron .",
+    "build": "electron-builder build --win --x64"
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "electron": "^16.2.8",
     "extract-zip": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.13.3"
   }
 }

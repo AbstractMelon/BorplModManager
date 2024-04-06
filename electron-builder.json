@@ -1,0 +1,12 @@
+{
+    "appId": "com.AbstractMelon.borpl-mod-manager",
+    "productName": "Borpl Mod Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    }
+  }
+  

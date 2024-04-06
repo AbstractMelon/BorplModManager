@@ -25,16 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
         mods.forEach((mod) => {
             const modCard = document.createElement('div');
             modCard.classList.add('mod');
+            modCard.style.backgroundImage = `url('./images/${mod.img}')`; // Set background image dynamically
             modCard.innerHTML = `
-                <img src="${mod.img}" alt="${mod.name}">
-                <p class="modName">${mod.name}</p>
-                <p class="modAuthor">By ${mod.author}</p>
-                <p class="modDescription">${mod.description}</p>
-                <button class="installModBtn" data-url="${mod.github}">Install Mod</button>
+                <div class="modContent">
+                    <!-- <p class="modAuthor">By ${mod.author}</p>
+                    <p class="modDescription">${mod.description}</p> -->
+                    <div class="actions center">
+                        <button class="installModBtn" data-url="${mod.github}">Install Mod</button>
+                    </div>
+                </div>
             `;
             modContainer.appendChild(modCard);
         });
     }
+    
+    
+    
 
     // Event delegation to handle install mod buttons
     modContainer.addEventListener('click', (event) => {
