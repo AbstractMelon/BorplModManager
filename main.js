@@ -55,7 +55,8 @@ app.on('ready', () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-        }
+        },
+        autoHideMenuBar: true,
     });
 
     mainWindow.loadFile('index.html');
