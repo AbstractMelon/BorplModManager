@@ -1,0 +1,12 @@
+{
+  "name": "borplmodmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "nw ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
