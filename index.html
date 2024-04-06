@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mod Manager</title>
+    <title>Borpl Mod Manager</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS file for styles -->
 </head>
 <body>
-    <h1>Mod Manager</h1>
-    <button onclick="fetchMods()">Fetch Mods</button>
-    <button onclick="installBepInEx()">Install BepInEx</button>
-    <button onclick="installSplotch()">Install Splotch</button>
-    <script src="index.js"></script>
+    <header>
+        <h1>Borpl Mod Manager</h1>
+    </header>
+
+    <main>
+        <div class="container" id="modContainer">
+            <!-- Mod cards will be dynamically added here -->
+        </div>
+        <div class="actions">
+            <button id="fetchModsBtn">Fetch Mods</button>
+            <button id="installSplotchBtn">Install Splotch</button>
+            <!-- Add more buttons as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Borpl Mod Manager</p>
+    </footer>
+
+    <script src="renderer.js"></script>
 </body>
 </html>

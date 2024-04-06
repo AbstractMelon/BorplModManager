@@ -1,0 +1,137 @@
+{
+  "mods": [
+    {
+      "name": "Ability Storm",
+      "author": "unluckycrafter",
+      "img": "AbilityStorm.png",
+      "description": "Ability Storm is a mod made by Unluckycrafter that spawns ability orbs at random positions. It also randomly picks which slot to put the ability orb into.",
+      "github": "https://github.com/minidogg/myboplmods/releases/tag/abilityStorm1.4"
+    },
+    {
+      "name": "Anti-Squish",
+      "author": "zbuzzard",
+      "img": "AntiSquish.png",
+      "description": "",
+      "github": "https://github.com/zbuzzard/Bopl-Battle-Mods/releases/tag/anti-squish-1.1.0"
+    },
+    {
+      "name": "Arrow Wall",
+      "author": "WackyModer",
+      "img": "ArrowWallIcon.jpg",
+      "description": "",
+      "github": "https://github.com/WackyModer/Bopl_Mods/releases/tag/ArrowWall"
+    },
+    {
+      "name": "Bigger Black Holes",
+      "author": "AbstractMelon",
+      "img": "BiggerBlackHoles.png",
+      "description": "",
+      "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/tag/bigger-black-holes-v1.1.0"
+    },
+    {
+      "name": "Bopl Guns",
+      "author": "ShAdowDev16",
+      "img": "GunsMod.png",
+      "description": "",
+      "github": "https://github.com/ShAdowDev16/BoplGuns"
+    },
+    {
+      "name": "Map Selector",
+      "author": "AbstractMelon and Mathlover3",
+      "img": "MapSelector.png",
+      "description": "",
+      "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/tag/map-selector-v1.0.0"
+    },
+    {
+      "name": "No Clone Limit",
+      "author": "MathLover3",
+      "img": "NoCloneLimit.png",
+      "description": "",
+      "github": "https://github.com/mathlover3/bopl-battle-mods/releases/tag/NoCloneLimit"
+    },
+    {
+      "name": "Almighty Push",
+      "author": "Really Bad Dev",
+      "img": "Almighty_Push.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Any Color",
+      "author": "David",
+      "img": "AnyColor.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Arrow Circle",
+      "author": "Breh",
+      "img": "ArrowCircle.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Guns Mod",
+      "author": "ShAdowDev16",
+      "img": "GunsMod.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Infinite Platform Size",
+      "author": "Diggity",
+      "img": "InfinitePlatformSize.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Instant Cooldowns",
+      "author": "AbstractMelon",
+      "img": "InstantCooldowns.jpg",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Low Gravity",
+      "author": "Master Oogway",
+      "img": "LowGravity.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "No Spike Disappear",
+      "author": "R4aina",
+      "img": "NoSpikeDisappear.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Same Color",
+      "author": "David",
+      "img": "SameColor.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Spectator Mode",
+      "author": "Diggity",
+      "img": "SpectatorMode.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Speedy Player",
+      "author": "Master Oogway",
+      "img": "SpeedyPlayer.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Time Stop Timer",
+      "author": "Antimality",
+      "img": "TimeStopTimer.png",
+      "description": "",
+      "github": ""
+    }
+  ]
+}

@@ -1,12 +1,13 @@
 {
-  "name": "borplmodmanager",
+  "name": "mod-manager",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
+  "main": "main.js",
   "scripts": {
-    "dev": "nw ."
+    "dev": "electron ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "axios": "^0.24.0",
+    "electron": "^16.2.8",
+    "extract-zip": "^2.0.1"
+  }
 }
