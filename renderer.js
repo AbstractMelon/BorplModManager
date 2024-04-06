@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mods.forEach((mod) => {
             const modCard = document.createElement('div');
             modCard.classList.add('mod');
-            modCard.style.backgroundImage = `url('./images/${mod.img}')`; // Set background image dynamically
+            modCard.style.backgroundImage = `url('${mod.img}')`; // Set background image dynamically
             modCard.innerHTML = `
                 <div class="modContent">
                     <!-- <p class="modAuthor">By ${mod.author}</p>

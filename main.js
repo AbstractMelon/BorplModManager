@@ -31,10 +31,6 @@ async function installSplotch(gameDir) {
     }
 }
 
-// Function to install mods
-async function installMod(modUrl, gameDir) {
-}
-
 // Function to extract ZIP file
 function extractZip(zipFilePath, outputDir) {
     return new Promise((resolve, reject) => {
@@ -92,6 +88,7 @@ app.on('ready', () => {
         try {
             await installMod(modUrl, gameDir);
             event.reply('mod-installed');
+            console.log('Mod installed successfully.');
         } catch (error) {
             console.error('Error installing mod:', error);
             event.reply('mod-install-error', error.message);
