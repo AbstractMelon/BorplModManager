@@ -95,6 +95,10 @@ async function installMod(modUrl, userDir) {
     }
 }
 
+function editSettings(setting, netSettingsValue)
+{
+    // IMA WORK ON THIS RN! DONT EDIT IT!
+}
 
 // Function to extract ZIP file
 function extractZip(zipFilePath, outputDir) {
