@@ -122,22 +122,11 @@ app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        resizable: false,
-        fullscreenable: false,
-        maximizable: false,
-        icon: __dirname + '/build/icon.ico',
-        backgroundColor: '#444444',
-        titleBarStyle: 'hidden',
-        titleBarOverlay: {
-          color: '#333333',
-          symbolColor: '#fafafa',
-          height: 50,
-          width: 50,
-        },
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-        }
+        },
+        autoHideMenuBar: true,
     });
 
     mainWindow.loadFile('index.html');
