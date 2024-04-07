@@ -1,22 +1,53 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Notification} = require('electron');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
 const extract = require('extract-zip');
+const { spawn } = require('child_process');
 console.log("main.js loaded");
+
+
+function runBoplBattleAndKill(boplDir, durationInSeconds) {
+    const boplExePath = path.join(boplDir, 'BoplBattle.exe');
+    console.log('Bopl Battle executable path:', boplExePath);
+
+    // Start BoplBattle.exe
+    const boplProcess = spawn(boplExePath, [], {
+        cwd: boplDir, // Set the working directory to boplDir
+        detached: true, // Detach the child process from the parent
+        stdio: 'ignore', // Ignore standard input/output/error streams
+    });
+
+    console.log('Bopl Battle process started.');
+
+    // Kill the process after the specified duration
+    setTimeout(() => {
+        console.log(`Killing Bopl Battle process after ${durationInSeconds} seconds.`);
+        process.kill(-boplProcess.pid); // Kill the process group (to ensure child processes are also killed)
+    }, durationInSeconds * 1000);
+}
+
 
 // Function to install Splotch
 async function installSplotch(gameDir) {
+    console.log('Starting Splotch installation...');
     const splotchZipUrl = 'https://github.com/codemob-dev/Splotch/releases/download/v0.5.1/Splotch-v0.5.1.zip';
     const tempZipPath = path.join(app.getPath('temp'), 'splotch.zip');
     const splotchDir = path.join(gameDir, 'Splotch');
+    
+    console.log('Downloading Splotch ZIP file from:', splotchZipUrl);
+    console.log('Temp ZIP file path:', tempZipPath);
+    console.log('Target Splotch directory:', splotchDir);
 
     try {
         const response = await axios.get(splotchZipUrl, { responseType: 'stream' });
         const writer = fs.createWriteStream(tempZipPath);
+
         response.data.pipe(writer);
 
         writer.on('finish', async () => {
+            console.log('Splotch ZIP file downloaded successfully.');
+            console.log('Extracting Splotch ZIP file to:', splotchDir);
             await extractZip(tempZipPath, splotchDir);
             console.log('Splotch installed successfully.');
         });
@@ -31,18 +62,57 @@ async function installSplotch(gameDir) {
     }
 }
 
+async function installMod(modUrl, userDir) {
+    const modDir = path.join(userDir, 'splotch_mods');
+
+    try {
+        // Ensure the splotch_mods directory exists
+        if (!fs.existsSync(modDir)) {
+            fs.mkdirSync(modDir);
+        }
+
+        const modFileName = path.basename(modUrl);
+        const modFilePath = path.join(modDir, modFileName);
+
+        const response = await axios.get(modUrl, { responseType: 'stream' });
+        const writer = fs.createWriteStream(modFilePath);
+
+        response.data.pipe(writer);
+
+        await new Promise((resolve, reject) => {
+            writer.on('finish', resolve);
+            writer.on('error', reject);
+        });
+
+        console.log('Mod downloaded successfully:', modFileName);
+    } catch (error) {
+        console.error('Error downloading mod:', error);
+        throw error;
+    }
+}
+
+
 // Function to extract ZIP file
 function extractZip(zipFilePath, outputDir) {
     return new Promise((resolve, reject) => {
-        extract(zipFilePath, { dir: outputDir }, (err) => {
+        const parentDir = path.dirname(outputDir); // Get the parent directory of Bopl Battle
+        console.log('Extracting ZIP file:', zipFilePath);
+        console.log('Parent directory:', parentDir);
+
+        extract(zipFilePath, { dir: parentDir }, (err) => {
             if (err) {
+                console.error('Error extracting ZIP file:', err);
                 reject(err);
             } else {
+                console.log('ZIP file extracted successfully.');
+                
                 resolve();
             }
         });
     });
 }
+
+
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
@@ -78,24 +148,37 @@ app.on('ready', () => {
 
 
     ipcMain.on('install-splotch', async (event) => {
-        const gameDir = await selectGameDirectory();
-        if (!gameDir) return;
+        // const gameDir = await selectGameDirectory();
+        // if (!gameDir) return;
 
         try {
-            await installSplotch(gameDir);
+            await installSplotch('C:\\Program Files (x86)\\Steam\\steamapps\\common\\Bopl Battle');
+            new Notification({
+                title: "Splotch Installed!",
+                body: "Splotch has installed successfully.",
+              }).show()
             event.reply('splotch-installed');
+            console.log('Starting Bopl Battle...');
+            runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
+            new Notification({
+                title: "Closed Bopl Battle!",
+                body: "Please close Bopl Battle manually.",
+              }).show()
+            console.log('Splotch installed successfully.');
         } catch (error) {
             console.error('Error installing Splotch:', error);
+            new Notification({
+                title: "Failed to Install Splotch!",
+                body: "Splotch has failed to install.",
+              }).show()
             event.reply('splotch-install-error', error.message);
         }
     });
     
     ipcMain.on('install-mod', async (event, modUrl) => {
-        const gameDir = await selectGameDirectory();
-        if (!gameDir) return;
-
+        let userDir = 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle/'
         try {
-            await installMod(modUrl, gameDir);
+            await installMod(modUrl, userDir);
             event.reply('mod-installed');
             console.log('Mod installed successfully.');
         } catch (error) {
@@ -109,7 +192,7 @@ async function selectGameDirectory() {
     const result = await dialog.showOpenDialog({
         title: 'Select Game Directory',
         properties: ['openDirectory'],
-        defaultPath: 'G:/Steam/steamapps/common/Bopl Battle'
+        defaultPath: 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle'
     });
 
     if (!result.canceled && result.filePaths.length > 0) {
