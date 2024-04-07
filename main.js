@@ -163,11 +163,11 @@ app.on('ready', () => {
               }).show()
             event.reply('splotch-installed');
             console.log('Starting Bopl Battle...');
-            runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
             new Notification({
-                title: "Closed Bopl Battle!",
+                title: "Close Bopl Battle!",
                 body: "Please close Bopl Battle manually.",
               }).show()
+            runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
             console.log('Splotch installed successfully.');
         } catch (error) {
             console.error('Error installing Splotch:', error);
@@ -185,6 +185,10 @@ app.on('ready', () => {
             await installMod(modUrl, userDir);
             event.reply('mod-installed');
             console.log('Mod installed successfully.');
+            new Notification({
+                title: "Mod installed!",
+                body: "mod " + modUrl +  ", has installed successfully.",
+              }).show()
         } catch (error) {
             console.error('Error installing mod:', error);
             event.reply('mod-install-error', error.message);
