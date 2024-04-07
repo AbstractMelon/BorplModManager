@@ -59,6 +59,17 @@ input[type="checkbox"] {
     margin-right: 10px; 
 }
 
+input[type="checkbox"] {
+    width: initial !important;
+    height: min-content !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.toggleDiv {
+    display: flex;
+}
+
 button {
     background-color: #5468FF; 
     color: #fff;
