@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mod Manager Settings</title>
     <link rel="stylesheet" href="settings.css"> <!-- Link to external CSS file for styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -43,6 +46,10 @@
                 <input type="checkbox" id="consoleEnabled">
             </div>
             <div class="toggleDiv">
+                <label for="modNamesEnabled">Mod Names Enabled:</label>
+                <input type="checkbox" id="modNamesEnabled">
+            </div>
+            <div class="toggleDiv">
                 <label for="verboseLogging">Verbose Logging:</label>
                 <input type="checkbox" id="verboseLogging">
             </div>
@@ -58,6 +65,12 @@
     </main>
 
     <script src="renderer.js"></script>
-    <script src="main.js"></script>
+    <button id="menuButton">Back</button>
+
+    <script>
+        document.getElementById('menuButton').addEventListener('click', () => {
+            window.location.href = 'index.html'; 
+        });
+    </script>
 </body>
 </html>

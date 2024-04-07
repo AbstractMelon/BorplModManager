@@ -1,35 +1,11 @@
 const { app, BrowserWindow, ipcMain, dialog, Notification} = require('electron');
 const path = require('path');
 const fs = require('fs');
-const yaml = require('js-yaml'); 
 const axios = require('axios');
 const extract = require('extract-zip');
 const { spawn } = require('child_process');
 console.log("main.js loaded");
 
-
-function readSettings() {
-    const configFile = path.join(userDir, 'splotch_config', 'splotchconfig.yaml');
-    try {
-        const configData = fs.readFileSync(configFile, 'utf8');
-        const settings = yaml.safeLoad(configData);
-        return settings.splotchConfig; 
-    } catch (error) {
-        console.error('Error reading settings:', error);
-        return null;
-    }
-}
-
-function saveSettings(settings) {
-    const configFile = path.join(userDir, 'splotch_config', 'splotchconfig.yaml');
-    try {
-        const yamlData = yaml.safeDump({ splotchConfig: settings });
-        fs.writeFileSync(configFile, yamlData, 'utf8');
-        console.log('Settings saved successfully.');
-    } catch (error) {
-        console.error('Error saving settings:', error);
-    }
-}
 
 function runBoplBattleAndKill(boplDir, durationInSeconds) {
     const boplExePath = path.join(boplDir, 'BoplBattle.exe');
@@ -119,10 +95,6 @@ async function installMod(modUrl, userDir) {
     }
 }
 
-function editSettings(setting, newSettingsValue)
-{
-    // IMA WORK ON THIS RN! DONT EDIT IT!
-}
 
 // Function to extract ZIP file
 function extractZip(zipFilePath, outputDir) {
@@ -150,11 +122,22 @@ app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        resizable: false,
+        fullscreenable: false,
+        maximizable: false,
+        icon: __dirname + '/build/icon.ico',
+        backgroundColor: '#444444',
+        titleBarStyle: 'hidden',
+        titleBarOverlay: {
+          color: '#333333',
+          symbolColor: '#fafafa',
+          height: 50,
+          width: 50,
+        },
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-        },
-        autoHideMenuBar: true,
+        }
     });
 
     mainWindow.loadFile('index.html');
