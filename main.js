@@ -57,16 +57,25 @@ app.on('ready', () => {
 
     mainWindow.loadFile('index.html');
 
+
     ipcMain.handle('fetch-mods', async () => {
         try {
-            const modsData = await fs.promises.readFile(path.join(__dirname, 'mods.json'), 'utf-8');
-            const mods = JSON.parse(modsData).mods;
+            // Fetch the JSON data from the URL using Axios
+            const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/json/mods.json');
+
+            // Extract the 'mods' property from the JSON data
+            const mods = response.data.mods;
+
+            // Log the fetched JSON data
+            console.log('Fetched mods:', mods);
+
             return mods;
         } catch (error) {
             console.error('Error fetching mods:', error);
             throw error;
         }
     });
+
 
     ipcMain.on('install-splotch', async (event) => {
         const gameDir = await selectGameDirectory();

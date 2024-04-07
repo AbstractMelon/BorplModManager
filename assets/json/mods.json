@@ -132,6 +132,13 @@
         "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/TimeStopTimer.png",
         "description": "",
         "github": ""
+      },
+      {
+        "name": "Demo Mod",
+        "author": "Melon",
+        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/TimeStopTimer.png",
+        "description": "",
+        "github": ""
       }
     ]
   }
