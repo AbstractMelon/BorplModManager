@@ -1,6 +1,6 @@
 {
   "name": "borpl-mod-manager",
-  "version": "1.0.0",
+  "version": "0.2.7",
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
