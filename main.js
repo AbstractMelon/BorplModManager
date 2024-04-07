@@ -85,6 +85,10 @@ async function installMod(modUrl, userDir) {
         });
 
         console.log('Mod downloaded successfully:', modFileName);
+        new Notification({
+            title: "Mod installed!",
+            body: "Mod " + modFileName +  ", has installed successfully.",
+          }).show()
     } catch (error) {
         console.error('Error downloading mod:', error);
         throw error;
