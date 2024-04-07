@@ -18,14 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.send('install-splotch');
     });
 
-    // Other button event listeners can be added here
 
     function displayMods(mods) {
         modContainer.innerHTML = '';
         mods.forEach((mod) => {
             const modCard = document.createElement('div');
             modCard.classList.add('mod');
-            modCard.style.backgroundImage = `url('${mod.img}')`; // Set background image dynamically
+            modCard.style.backgroundImage = `url('${mod.img}')`; 
             modCard.innerHTML = `
                 <div class="modContent">
                     <!-- <p class="modAuthor">By ${mod.author}</p>
@@ -39,10 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    
-    
-
-    // Event delegation to handle install mod buttons
+    // Listen for install-mod event
     modContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('installModBtn')) {
             const modUrl = event.target.getAttribute('data-url');

@@ -60,7 +60,7 @@ app.on('ready', () => {
 
     ipcMain.handle('fetch-mods', async () => {
         try {
-            // Fetch the JSON data from the URL using Axios
+            // Fetch the JSON data
             const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/json/mods.json');
 
             // Extract the 'mods' property from the JSON data
