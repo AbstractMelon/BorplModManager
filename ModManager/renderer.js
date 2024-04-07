@@ -45,4 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
             ipcRenderer.send('install-mod', modUrl);
         }
     });
+
+
+    // SETTINGS!
+    document.addEventListener('DOMContentLoaded', () => {
+        const consoleEnabledCheckbox = document.getElementById('consoleEnabled');
+        const verboseLoggingCheckbox = document.getElementById('verboseLogging');
+        const nightlyCheckbox = document.getElementById('nightly');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+    
+        // Populate settings UI when the page loads
+        const settings = readSettings();
+        if (settings) {
+            consoleEnabledCheckbox.checked = settings.consoleEnabled;
+            verboseLoggingCheckbox.checked = settings.verboseLoggingEnabled;
+            nightlyCheckbox.checked = settings.nightly;
+        }
+    
+        // Save settings when the "Save Settings" button is clicked
+        saveSettingsBtn.addEventListener('click', () => {
+            const newSettings = {
+                consoleEnabled: consoleEnabledCheckbox.checked,
+                verboseLoggingEnabled: verboseLoggingCheckbox.checked,
+                nightly: nightlyCheckbox.checked
+            };
+            saveSettings(newSettings);
+        });
+    });
 });
