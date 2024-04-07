@@ -21,10 +21,10 @@ function runBoplBattleAndKill(boplDir, durationInSeconds) {
     console.log('Bopl Battle process started.');
 
     // Kill the process after the specified duration
-    setTimeout(() => {
+    /* setTimeout(() => {
         console.log(`Killing Bopl Battle process after ${durationInSeconds} seconds.`);
         process.kill(-boplProcess.pid); // Kill the process group (to ensure child processes are also killed)
-    }, durationInSeconds * 1000);
+    }, durationInSeconds * 1000); */
 }
 
 
