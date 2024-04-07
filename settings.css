@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #444444;
+}
+
+header {
+    background-color: #1d1d1d;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+header h1 p {
+    margin: 0;
+    color:rgb(255, 255, 255)
+}
+
+main {
+    padding: 20px;
+}
+
+.container {
+    width: 40%;
+    padding: 10px;
+    background-color: #292929b7;
+    justify-content: left;
+    margin-bottom: 20px; 
+    left: 0;
+    color: #ffffff;
+}
+
+.optionscontainer {
+    width: 40%;
+    justify-content: center;
+    margin-bottom: 20px; 
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    color: #ffffff;
+}
+
+label {
+    margin-right: 10px; 
+}
+
+input[type="text"],
+input[type="checkbox"],
+button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="text"],
+input[type="checkbox"] {
+    width: 200px;
+    margin-right: 10px; 
+}
+
+button {
+    background-color: #5468FF; 
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3c4fe0; 
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: right;
+    padding: 20px;
+}
+
+button#saveSettingsBtn {
+    background-color: #2ecc71; 
+}
+
+button#saveSettingsBtn:hover {
+    background-color: #27ae60; 
+}
+
+.configuration-section {
+    background-color: #292929b7; 
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.configuration-section h2 {
+    color: #ffffff; 
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 10px;
+}
+
+.configuration-section label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.configuration-section input[type="checkbox"] {
+    margin-right: 5px; 
+}

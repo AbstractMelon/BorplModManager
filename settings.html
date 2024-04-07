@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mod Manager Settings</title>
+    <link rel="stylesheet" href="settings.css"> <!-- Link to external CSS file for styles -->
+</head>
+<body>
+    <header>
+        <h1>Mod Manager Settings</h1>
+    </header>
+
+    <main>
+        <section class="container">
+            <h2>Path Settings</h2>
+            <div>
+                <label for="path">Mod Directory Path:</label>
+                <input type="text" id="path" placeholder="Enter path...">
+                <button id="browseBtn">Browse</button>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2>Mod Management</h2>
+            <div>
+                <button id="uninstallAllModsBtn">Uninstall All Mods</button>
+                <button id="resetDataBtn">Reset Data</button>
+                <br>
+                <br>
+            </div>
+            <div>
+                <label for="disableMods">Disable Mods:</label>
+                <input type="checkbox" id="disableMods">
+            </div>
+        </section>
+
+       <!-- Update the Configuration section in your HTML with the new CSS class -->
+        <section class="optionscontainer configuration-section">
+            <h2>Configuration</h2>
+            <div>
+                <label for="consoleEnabled">Console Enabled:</label>
+                <input type="checkbox" id="consoleEnabled">
+            </div>
+            <div>
+                <label for="modNamesEnabled">Mod Names Enabled:</label>
+                <input type="checkbox" id="modNamesEnabled">
+            </div>
+            <div>
+                <label for="verboseLogging">Verbose Logging:</label>
+                <input type="checkbox" id="verboseLogging">
+            </div>
+            <div>
+                <label for="nightly">Nightly:</label>
+                <input type="checkbox" id="nightly">
+            </div>
+            <div>
+                <button id="saveSettingsBtn">Save Settings</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

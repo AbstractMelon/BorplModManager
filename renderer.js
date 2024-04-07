@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.send('install-splotch');
     });
 
-
+    // Epic mod text
     function displayMods(mods) {
         modContainer.innerHTML = '';
         mods.forEach((mod) => {

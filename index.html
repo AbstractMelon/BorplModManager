@@ -12,17 +12,15 @@
     </header>
 
     <main>
-        <div class="container" id="modContainer">
-        </div>
         <div class="actions">
             <div class="center">
                 <button id="fetchModsBtn">Fetch Mods</button>
+                <button id="installSplotchBtn">Install Splotch</button>
+                <button id="settingsButton">Mod settings</button>
+                <br>
             </div>
         </div>
-        <div class="actions">
-            <div class="center">
-                <button id="installSplotchBtn">Install Splotch</button>
-            </div>
+        <div class="container" id="modContainer">
         </div>
     </main>
 
@@ -31,5 +29,10 @@
     </footer> -->
 
     <script src="renderer.js"></script>
+    <script>
+        document.getElementById('settingsButton').addEventListener('click', () => {
+            window.location.href = 'settings.html'; 
+        });
+    </script>
 </body>
 </html>
