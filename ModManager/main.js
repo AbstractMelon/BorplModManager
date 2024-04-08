@@ -116,94 +116,143 @@ function extractZip(zipFilePath, outputDir) {
     });
 }
 
-
-
-app.on('ready', () => {
-    const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        resizable: false,
-        fullscreenable: false,
-        maximizable: false,
-        icon: __dirname + '/build/icon.ico',
-        backgroundColor: '#444444',
-        titleBarStyle: 'hidden',
-        titleBarOverlay: {
-          color: '#333333',
-          symbolColor: '#fafafa',
-          height: 50,
-          width: 50,
-        },
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-        }
+function createSplashScreen() {
+    const win = new BrowserWindow({
+      width: 300,
+      height: 500,
+      frame: false,
+      transparent: true,
+      resizable: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
     });
-
-    mainWindow.loadFile('index.html');
-
-
-    ipcMain.handle('fetch-mods', async () => {
-        try {
-            // Fetch the JSON data
-            const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/json/mods.json');
-
-            // Extract the 'mods' property from the JSON data
-            const mods = response.data.mods;
-
-            // Log the fetched JSON data
-            console.log('Fetched mods:', mods);
-
-            return mods;
-        } catch (error) {
-            console.error('Error fetching mods:', error);
-            throw error;
-        }
-    });
-
-
-    ipcMain.on('install-splotch', async (event) => {
-        // const gameDir = await selectGameDirectory();
-        // if (!gameDir) return;
-
-        try {
-            await installSplotch('C:\\Program Files (x86)\\Steam\\steamapps\\common\\Bopl Battle');
-            new Notification({
-                title: "Splotch Installed!",
-                body: "Splotch has installed successfully.",
-              }).show()
-            event.reply('splotch-installed');
-            console.log('Starting Bopl Battle...');
-            new Notification({
-                title: "Close Bopl Battle!",
-                body: "Please close Bopl Battle manually.",
-              }).show()
-            runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
-            console.log('Splotch installed successfully.');
-        } catch (error) {
-            console.error('Error installing Splotch:', error);
-            new Notification({
-                title: "Failed to Install Splotch!",
-                body: "Splotch has failed to install.",
-              }).show()
-            event.reply('splotch-install-error', error.message);
-        }
-    });
+  
+    win.loadFile(path.join(__dirname, 'splash.html'))
+      .then(() => {
+        getRandomQuote().then(quote => {
+          win.webContents.send('quote', quote);
+        });
+      });
     
-    ipcMain.on('install-mod', async (event, modUrl) => {
-        let userDir = 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle/'
-        try {
-            await installMod(modUrl, userDir);
-            event.reply('mod-installed');
-            console.log('Mod installed successfully.');
-            new Notification({
-                title: "Mod installed!",
-                body: "mod " + modUrl +  ", has installed successfully.",
-              }).show()
-        } catch (error) {
-            console.error('Error installing mod:', error);
-            event.reply('mod-install-error', error.message);
-        }
+    win.on('closed', () => {
+      splash = null;
+    });
+  
+    return win;
+}
+
+async function getRandomQuote() {
+    try {
+        const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/master/assets/quots.json');
+        const quotes = response.data.quotes;
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        return quotes[randomIndex];
+    } catch (error) {
+        console.error('Error fetching random quote:', error);
+        return 'Error fetching quote';
+    }
+}
+
+
+app.whenReady().then(() => {
+    splash = createSplashScreen(); // Load the splash screen
+
+    splash.once('ready-to-show', () => {
+        splash.show();
+    
+        // Hide the splash screen after a random delay between 0.5 to 4 seconds
+        const splashDuration = Math.random() * (4000 - 500) + 500; // Random number between 0.5 to 4 seconds in milliseconds
+        setTimeout(() => {
+            splash.destroy();
+    
+            // Create the main window after the splash screen is destroyed
+            const mainWindow = new BrowserWindow({
+                width: 800,
+                height: 600,
+                resizable: false,
+                fullscreenable: false,
+                maximizable: false,
+                icon: __dirname + '/build/icon.ico',
+                backgroundColor: '#444444',
+                titleBarStyle: 'hidden',
+                titleBarOverlay: {
+                  color: '#333333',
+                  symbolColor: '#fafafa',
+                  height: 50,
+                  width: 50,
+                },
+                webPreferences: {
+                    nodeIntegration: true,
+                    contextIsolation: false,
+                }
+            });
+    
+            mainWindow.loadFile('index.html');
+
+        ipcMain.handle('fetch-mods', async () => {
+            try {
+                // Fetch the JSON data
+                const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/json/mods.json');
+
+                // Extract the 'mods' property from the JSON data
+                const mods = response.data.mods;
+
+                // Log the fetched JSON data
+                console.log('Fetched mods:', mods);
+
+                return mods;
+            } catch (error) {
+                console.error('Error fetching mods:', error);
+                throw error;
+            }
+        });
+
+
+        ipcMain.on('install-splotch', async (event) => {
+            // const gameDir = await selectGameDirectory();
+            // if (!gameDir) return;
+
+            try {
+                await installSplotch('C:\\Program Files (x86)\\Steam\\steamapps\\common\\Bopl Battle');
+                new Notification({
+                    title: "Splotch Installed!",
+                    body: "Splotch has installed successfully.",
+                  }).show()
+                event.reply('splotch-installed');
+                console.log('Starting Bopl Battle...');
+                new Notification({
+                    title: "Close Bopl Battle!",
+                    body: "Please close Bopl Battle manually.",
+                  }).show()
+                runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
+                console.log('Splotch installed successfully.');
+            } catch (error) {
+                console.error('Error installing Splotch:', error);
+                new Notification({
+                    title: "Failed to Install Splotch!",
+                    body: "Splotch has failed to install.",
+                  }).show()
+                event.reply('splotch-install-error', error.message);
+            }
+        });
+        
+        ipcMain.on('install-mod', async (event, modUrl) => {
+            let userDir = 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle/'
+            try {
+                await installMod(modUrl, userDir);
+                event.reply('mod-installed');
+                console.log('Mod installed successfully.');
+                new Notification({
+                    title: "Mod installed!",
+                    body: "mod " + modUrl +  ", has installed successfully.",
+                  }).show()
+            } catch (error) {
+                console.error('Error installing mod:', error);
+                event.reply('mod-install-error', error.message);
+            }
+        });
+    }, splashDuration);
     });
 });
 
