@@ -72,16 +72,5 @@
             window.location.href = 'index.html'; 
         });
     </script>
-    <script>
-        const { ipcRenderer } = require('electron');
-
-        // Add an event listener to the button
-        document.getElementById('browseBtn').addEventListener('click', async () => {
-            // Send a message to the main process to trigger the directory selection
-            const gameDir = await ipcRenderer.invoke('select-game-directory');
-            console.log('Selected game directory:', gameDir);
-            // Handle the selected game directory as needed
-        });
-    </script>
 </body>
 </html>

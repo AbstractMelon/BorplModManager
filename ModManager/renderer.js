@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.send('install-splotch');
     });
 
+    document.getElementById('browseBtn').addEventListener('click', async () => {
+        const gameDir = await ipcRenderer.invoke('select-game-directory');
+        console.log('Selected game directory:', gameDir);
+    });
+
     // Epic mod text
     function displayMods(mods) {
         modContainer.innerHTML = '';
