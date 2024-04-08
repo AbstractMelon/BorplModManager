@@ -182,6 +182,8 @@ app.whenReady().then(() => {
             maximizable: true,
             icon: __dirname + '/build/icon.ico',
             backgroundColor: '#444444',
+            autoHideMenuBar: true,
+            /*
             titleBarStyle: 'hidden',
             titleBarOverlay: {
                 color: '#333333',
@@ -189,12 +191,14 @@ app.whenReady().then(() => {
                 height: 50,
                 width: 50,
             },
+            */
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
             }
         });
         
+        mainWindow.maximize()
 
         drag({ mainWindow });
 
