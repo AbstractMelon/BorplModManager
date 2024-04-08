@@ -4,7 +4,10 @@ const fs = require('fs');
 const axios = require('axios');
 const extract = require('extract-zip');
 const { spawn } = require('child_process');
+const drag = require('electron-drag');
+
 console.log("main.js loaded");
+
 
 let splash;
 
@@ -131,11 +134,11 @@ function createSplashScreen() {
     });
 
     win.loadFile(path.join(__dirname, 'splash.html'))
-        .then(() => {
+    /*    .then(() => {
             getRandomQuote().then(quote => {
                 win.webContents.send('quote', quote);
             });
-        });
+        }); */
 
     win.on('closed', () => {
         splash = null;
@@ -171,9 +174,9 @@ app.whenReady().then(() => {
         });
 
         // Create the main window
-        const mainWindow = new BrowserWindow({
-            width: 800,
-            height: 600,
+        mainWindow = new BrowserWindow({
+            width: 1030,
+            height: 680,
             resizable: true,
             fullscreenable: true,
             maximizable: true,
@@ -191,6 +194,9 @@ app.whenReady().then(() => {
                 contextIsolation: false,
             }
         });
+        
+
+        drag({ mainWindow });
 
         mainWindow.loadFile('index.html');
 
@@ -263,7 +269,7 @@ app.whenReady().then(() => {
                 event.reply('mod-install-error', error.message);
             }
         });
-        
+
         ipcMain.handle('select-game-directory', async () => {
             const result = await dialog.showOpenDialog({
                 title: 'Select Game Directory',
