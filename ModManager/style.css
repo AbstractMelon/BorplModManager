@@ -25,6 +25,7 @@
     height: 50px;
     background-color: #333;
     z-index: 9999999;
+    -webkit-app-region: drag;
 }
 
 body {

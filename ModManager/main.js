@@ -4,7 +4,7 @@ const fs = require('fs');
 const axios = require('axios');
 const extract = require('extract-zip');
 const { spawn } = require('child_process');
-const drag = require('electron-drag');
+// const drag = require('electron-drag');
 
 console.log("main.js loaded");
 
@@ -122,12 +122,13 @@ function extractZip(zipFilePath, outputDir) {
 
 function createSplashScreen() {
     const win = new BrowserWindow({
-        width: 300,
+        width: 400,
         height: 500,
         frame: false,
         transparent: true,
         resizable: false,
         alwaysOnTop: true, // Set splash screen to always be on top
+        skipTaskbar: true,
         webPreferences: {
             nodeIntegration: true
         }
@@ -175,15 +176,15 @@ app.whenReady().then(() => {
 
         // Create the main window
         mainWindow = new BrowserWindow({
-            width: 1030,
-            height: 680,
-            resizable: true,
-            fullscreenable: true,
-            maximizable: true,
+            width: 800,
+            height: 600,
+            resizable: false,
+            fullscreenable: false,
+            maximizable: false,
+            show: false,
             icon: __dirname + '/build/icon.ico',
             backgroundColor: '#444444',
             autoHideMenuBar: true,
-            /*
             titleBarStyle: 'hidden',
             titleBarOverlay: {
                 color: '#333333',
@@ -191,24 +192,18 @@ app.whenReady().then(() => {
                 height: 50,
                 width: 50,
             },
-            */
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
             }
         });
-        
-        mainWindow.maximize()
-
-        drag({ mainWindow });
-
         mainWindow.loadFile('index.html');
 
         // Destroy splash screen
         setTimeout(() => {
             splash.destroy();
             mainWindow.show(); 
-        }, 200); 
+        }, 2000); 
 
 
         ipcMain.handle('fetch-mods', async () => {
