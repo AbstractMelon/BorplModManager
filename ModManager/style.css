@@ -1,10 +1,38 @@
 /* styles.css */
 
+::-webkit-scrollbar {
+    width: 15px;
+    padding: 2.5px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+.top-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    background-color: #333;
+    z-index: 9999999;
+}
+
 body {
     font-family: Lexend, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #444444;
+    overflow-x: hidden;
 }
 
 header {
