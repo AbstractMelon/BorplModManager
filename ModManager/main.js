@@ -6,6 +6,7 @@ const extract = require('extract-zip');
 const { spawn } = require('child_process');
 console.log("main.js loaded");
 
+let splash;
 
 function runBoplBattleAndKill(boplDir, durationInSeconds) {
     const boplExePath = path.join(boplDir, 'BoplBattle.exe');
@@ -31,39 +32,39 @@ function runBoplBattleAndKill(boplDir, durationInSeconds) {
 // Function to install Splotch
 async function installSplotch(gameDir) {
     console.log('Starting Splotch installation...');
-    const splotchZipUrl = 'https://github.com/codemob-dev/Splotch/releases/download/v0.5.1/Splotch-v0.5.1.zip';
-    const tempZipPath = path.join(app.getPath('temp'), 'splotch.zip');
-    const splotchDir = path.join(gameDir, 'Splotch');
+    const bepinexZipUrl = 'https://github.com/BepInEx/BepInEx/releases/download/v5.4.22/BepInEx_x64_5.4.22.0.zip'; // const splotchZipUrl = 'https://github.com/codemob-dev/Splotch/releases/download/v0.5.1/Splotch-v0.5.1.zip';
+    const tempZipPath = path.join(app.getPath('temp'), 'BepInEx_x64_5.4.22.0.zip');  //const tempZipPath = path.join(app.getPath('temp'), 'splotch.zip');
+    const bepinexDir = path.join(gameDir, 'BepInEx_x64_5.4.22.0'); //splotchDir = path.join(gameDir, 'Splotch');
     
-    console.log('Downloading Splotch ZIP file from:', splotchZipUrl);
-    console.log('Temp ZIP file path:', tempZipPath);
-    console.log('Target Splotch directory:', splotchDir);
+    console.log('Downloading Bepinex ZIP file from:', bepinexZipUrl); // console.log('Downloading Splotch ZIP file from:', splotchZipUrl);
+    console.log('Temp ZIP file path:', tempZipPath); // console.log('Temp ZIP file path:', tempZipPath);
+    console.log('Target Bepinex directory:', bepinexDir); // console.log('Target Splotch directory:', splotchDir);
 
     try {
-        const response = await axios.get(splotchZipUrl, { responseType: 'stream' });
+        const response = await axios.get(bepinexZipUrl, { responseType: 'stream' }); // const response = await axios.get(splotchZipUrl, { responseType: 'stream' });
         const writer = fs.createWriteStream(tempZipPath);
 
         response.data.pipe(writer);
 
         writer.on('finish', async () => {
-            console.log('Splotch ZIP file downloaded successfully.');
-            console.log('Extracting Splotch ZIP file to:', splotchDir);
-            await extractZip(tempZipPath, splotchDir);
-            console.log('Splotch installed successfully.');
+            console.log('Bepinex ZIP file downloaded successfully.');
+            console.log('Extracting Bepinex ZIP file to:', bepinexDir);
+            await extractZip(tempZipPath, bepinexDir);
+            console.log('Bepinex installed successfully.');
         });
 
         writer.on('error', (error) => {
-            console.error('Error downloading Splotch:', error);
+            console.error('Error downloading Bepinex:', error);
             throw error;
         });
     } catch (error) {
-        console.error('Error downloading Splotch:', error);
+        console.error('Error downloading Bepinex:', error);
         throw error;
     }
 }
 
 async function installMod(modUrl, userDir) {
-    const modDir = path.join(userDir, 'splotch_mods');
+    const modDir = path.join(userDir, '/Bepinex/plugins/'); // const modDir = path.join(userDir, 'splotch_mods');
 
     try {
         // Ensure the splotch_mods directory exists
@@ -118,33 +119,34 @@ function extractZip(zipFilePath, outputDir) {
 
 function createSplashScreen() {
     const win = new BrowserWindow({
-      width: 300,
-      height: 500,
-      frame: false,
-      transparent: true,
-      resizable: false,
-      webPreferences: {
-        nodeIntegration: true
-      }
+        width: 300,
+        height: 500,
+        frame: false,
+        transparent: true,
+        resizable: false,
+        alwaysOnTop: true, // Set splash screen to always be on top
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
-  
+
     win.loadFile(path.join(__dirname, 'splash.html'))
-      .then(() => {
-        getRandomQuote().then(quote => {
-          win.webContents.send('quote', quote);
+        .then(() => {
+            getRandomQuote().then(quote => {
+                win.webContents.send('quote', quote);
+            });
         });
-      });
-    
+
     win.on('closed', () => {
-      splash = null;
+        splash = null;
     });
-  
+
     return win;
 }
 
 async function getRandomQuote() {
     try {
-        const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/master/assets/quots.json');
+        const response = await axios.get('https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/quotes.json');
         const quotes = response.data.quotes;
         const randomIndex = Math.floor(Math.random() * quotes.length);
         return quotes[randomIndex];
@@ -160,35 +162,44 @@ app.whenReady().then(() => {
 
     splash.once('ready-to-show', () => {
         splash.show();
-    
-        // Hide the splash screen after a random delay between 0.5 to 4 seconds
-        const splashDuration = Math.random() * (4000 - 500) + 500; // Random number between 0.5 to 4 seconds in milliseconds
+
+        // Hide the main window until splash screen is destroyed
+        app.on('browser-window-created', (event, mainWindow) => {
+            if (mainWindow !== splash) {
+                mainWindow.hide();
+            }
+        });
+
+        // Create the main window
+        const mainWindow = new BrowserWindow({
+            width: 800,
+            height: 600,
+            resizable: true,
+            fullscreenable: true,
+            maximizable: true,
+            icon: __dirname + '/build/icon.ico',
+            backgroundColor: '#444444',
+            titleBarStyle: 'hidden',
+            titleBarOverlay: {
+                color: '#333333',
+                symbolColor: '#fafafa',
+                height: 50,
+                width: 50,
+            },
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+            }
+        });
+
+        mainWindow.loadFile('index.html');
+
+        // Destroy splash screen
         setTimeout(() => {
             splash.destroy();
-    
-            // Create the main window after the splash screen is destroyed
-            const mainWindow = new BrowserWindow({
-                width: 800,
-                height: 600,
-                resizable: false,
-                fullscreenable: false,
-                maximizable: false,
-                icon: __dirname + '/build/icon.ico',
-                backgroundColor: '#444444',
-                titleBarStyle: 'hidden',
-                titleBarOverlay: {
-                  color: '#333333',
-                  symbolColor: '#fafafa',
-                  height: 50,
-                  width: 50,
-                },
-                webPreferences: {
-                    nodeIntegration: true,
-                    contextIsolation: false,
-                }
-            });
-    
-            mainWindow.loadFile('index.html');
+            mainWindow.show(); 
+        }, 200); 
+
 
         ipcMain.handle('fetch-mods', async () => {
             try {
@@ -252,7 +263,20 @@ app.whenReady().then(() => {
                 event.reply('mod-install-error', error.message);
             }
         });
-    }, splashDuration);
+        
+        ipcMain.handle('select-game-directory', async () => {
+            const result = await dialog.showOpenDialog({
+                title: 'Select Game Directory',
+                properties: ['openDirectory'],
+                defaultPath: 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle'
+            });
+    
+            if (!result.canceled && result.filePaths.length > 0) {
+                return result.filePaths[0];
+            } else {
+                return null;
+            }
+        });
     });
 });
 
