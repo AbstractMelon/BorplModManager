@@ -178,9 +178,8 @@ app.whenReady().then(() => {
         mainWindow = new BrowserWindow({
             width: 800,
             height: 600,
-            resizable: false,
-            fullscreenable: false,
-            maximizable: false,
+            minWidth: 600,
+            minHeight: 450,
             show: false,
             icon: __dirname + '/build/icon.ico',
             backgroundColor: '#444444',
