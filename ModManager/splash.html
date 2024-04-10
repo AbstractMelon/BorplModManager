@@ -17,12 +17,6 @@
       <div id="quote">Pro tip: get good</div>
     </div>
   </div>
-  <script>
-    const { ipcRenderer } = require('electron');
-    ipcRenderer.on('quote', (event, quote) => {
-      const quoteElement = document.getElementById('quote');
-      quoteElement.innerText = `"${quote}"`;
-    });
-  </script>
+  <script src="renderer.js"></script>
 </body>
 </html>

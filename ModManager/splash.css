@@ -6,6 +6,10 @@ body {
     -webkit-app-region: drag;
 }
 
+body:active {
+    cursor: none;
+}
+
 .container {
     border-radius: 10px;
     background: black;
@@ -15,6 +19,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container:active {
+    cursor: none;
 }
 
 .content {
