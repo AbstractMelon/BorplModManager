@@ -101,7 +101,7 @@ document.getElementById('menuButton').addEventListener('click', () => {
         pathInput.addEventListener('input', () => {
             const pathRegex = /^[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$/;
             if (!pathRegex.test(pathInput.value)) {
-                pathError.textContent = 'Invalid path format. Example: C:\\folder\\subfolder';
+                pathError.textContent = 'Invalid path format. Example: C:\\Program Files (x86)\\steam\\steamapps\\common\\Bopl Battle\\';
                 pathError.style.display = 'block';
             } else {
                 pathError.style.display = 'none';
