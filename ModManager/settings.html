@@ -21,6 +21,7 @@
                 <label for="path">Mod Directory Path:</label>
                 <input type="text" id="path" placeholder="Enter path...">
                 <button id="browseBtn">Browse</button>
+                <div id="pathError" class="error-message"></div>
             </div>
         </section>
 
@@ -58,18 +59,53 @@
                 <input type="checkbox" id="nightly">
             </div>
             <div class="toggleDiv">
-                <button id="saveSettingsBtn">Save Settings</button>
+                <button id="saveSettingsBtn" onclick="console.log('Button buttoning?');">Save Settings</button>
             </div>
         </section>
 
     </main>
 
     <script src="renderer.js"></script>
-    <button id="menuButton">Back</button>
+    <button id="menuButton">Save and exit!</button>
 
     <script>
-        document.getElementById('menuButton').addEventListener('click', () => {
+document.getElementById('menuButton').addEventListener('click', () => {
+            // Get the custom path value
+            const customPath = document.getElementById('path').value.trim();
+            
+            // Send the custom path to the main process
+            console.log(customPath)
+            ipcRenderer.send('save-custom-path', customPath);
+            
+            // Redirect to the index.html page
             window.location.href = 'index.html'; 
+        });
+
+        document.getElementById('uninstallAllModsBtn').addEventListener('click', () => {
+            ipcRenderer.send('uninstall-all-mods');
+        });
+
+        document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+            const customPath = document.getElementById('customPath').value.trim();
+            console.log(customPath);
+            ipcRenderer.send('save-custom-path', customPath);
+        });
+
+        document.getElementById('browseBtn').addEventListener('click', () => {
+            ipcRenderer.send('open-file-dialog');
+        });
+
+        const pathInput = document.getElementById('path');
+        const pathError = document.getElementById('pathError');
+
+        pathInput.addEventListener('input', () => {
+            const pathRegex = /^[A-Za-z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$/;
+            if (!pathRegex.test(pathInput.value)) {
+                pathError.textContent = 'Invalid path format. Example: C:\\folder\\subfolder';
+                pathError.style.display = 'block';
+            } else {
+                pathError.style.display = 'none';
+            }
         });
     </script>
 </body>

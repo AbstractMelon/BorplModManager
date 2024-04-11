@@ -6,10 +6,29 @@ const extract = require('extract-zip');
 const { spawn } = require('child_process');
 // const drag = require('electron-drag');
 
-console.log("main.js loaded");
+console.log("Bopl Mod manager loaded!");
 
+
+let defaultModDir = 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle/Bepinex/plugins';
+let customModDir = "";
+
+console.log('Default mod directory:', defaultModDir);
+console.log('Custom mod directory:', customModDir);
 
 let splash;
+
+
+function setCustomModDirectory(customPath) {
+    customModDir = customPath;
+}
+
+function getModDirectory() {
+    if (customModDir) {
+        return customModDir;
+    }
+    return defaultModDir;
+}
+
 
 function runBoplBattleAndKill(boplDir, durationInSeconds) {
     const boplExePath = path.join(boplDir, 'BoplBattle.exe');
@@ -96,6 +115,21 @@ async function installMod(modUrl, userDir) {
     } catch (error) {
         console.error('Error downloading mod:', error);
         throw error;
+    }
+}
+
+function uninstallAllMods() {
+    const modDir = getModDirectory();
+    try {
+        // Remove all files in the mod directory
+        fs.readdirSync(modDir).forEach(file => {
+            fs.unlinkSync(path.join(modDir, file));
+        });
+        console.log('All mods uninstalled successfully.');
+        event.reply('mods-uninstalled');
+    } catch (error) {
+        console.error('Error uninstalling mods:', error);
+        event.reply('mods-uninstall-error', error.message);
     }
 }
 
@@ -204,6 +238,19 @@ app.whenReady().then(() => {
             mainWindow.show(); 
         }, 2000); 
 
+        ipcMain.on('save-custom-path', (event, customPath) => {
+
+            console.log('Custom path received:', customPath);
+
+            setCustomModDirectory(customPath)
+        
+            dialog.showMessageBox({
+                type: 'info',
+                message: `Custom path selected: ${customPath}`,
+                buttons: ['OK']
+            });
+        
+        });
 
         ipcMain.handle('fetch-mods', async () => {
             try {
@@ -227,9 +274,10 @@ app.whenReady().then(() => {
         ipcMain.on('install-splotch', async (event) => {
             // const gameDir = await selectGameDirectory();
             // if (!gameDir) return;
+            const modDir = getModDirectory();
 
             try {
-                await installSplotch('C:\\Program Files (x86)\\Steam\\steamapps\\common\\Bopl Battle');
+                await installSplotch(modDir);
                 new Notification({
                     title: "Splotch Installed!",
                     body: "Splotch has installed successfully.",
@@ -240,7 +288,7 @@ app.whenReady().then(() => {
                     title: "Close Bopl Battle!",
                     body: "Please close Bopl Battle manually.",
                   }).show()
-                runBoplBattleAndKill('C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle', 5);
+                runBoplBattleAndKill(modDir, 5);
                 console.log('Splotch installed successfully.');
             } catch (error) {
                 console.error('Error installing Splotch:', error);
@@ -253,9 +301,9 @@ app.whenReady().then(() => {
         });
         
         ipcMain.on('install-mod', async (event, modUrl) => {
-            let userDir = 'C:/Program Files (x86)/Steam/steamapps/common/Bopl Battle/'
+            const modDir = getModDirectory();
             try {
-                await installMod(modUrl, userDir);
+                await installMod(modUrl, modDir);
                 event.reply('mod-installed');
                 console.log('Mod installed successfully.');
                 new Notification({
@@ -281,6 +329,11 @@ app.whenReady().then(() => {
                 return null;
             }
         });
+
+        ipcMain.on('uninstall-all-mods', (event) => {
+            uninstallAllMods();
+        });
+        
     });
 });
 
