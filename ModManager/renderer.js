@@ -1,6 +1,13 @@
 const { ipcRenderer } = require('electron');
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.location === "splash.html") {
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.on('quote', (event, quote) => {
+            const quoteElement = document.getElementById('quote');
+            quoteElement.innerText = `"${quote}"`;
+        });
+    }
     const fetchModsBtn = document.getElementById('fetchModsBtn');
     const installSplotchBtn = document.getElementById('installSplotchBtn');
     const modContainer = document.getElementById('modContainer');
