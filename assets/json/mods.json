@@ -1,145 +1,130 @@
 {
-    "mods": [
-      {
-        "name": "Ability Storm",
-        "author": "unluckycrafter",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/AbilityStorm.png",
-        "description": "",
-        "github": "https://github.com/minidogg/myboplmods/releases/download/abilityStorm1.4/AbilityStorm.dll"
-      },
-      {
-        "name": "Anti-Squish",
-        "author": "zbuzzard",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/AntiSquish.png",
-        "description": "",
-        "github": "https://github.com/zbuzzard/Bopl-Battle-Mods/releases/tag/anti-squish-1.1.0"
-      },
-      {
-        "name": "Arrow Wall",
-        "author": "WackyModer",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/ArrowWallIcon.jpg",
-        "description": "",
-        "github": "https://github.com/WackyModer/Bopl_Mods/releases/tag/ArrowWall"
-      },
-      {
-        "name": "Bigger Black Holes",
-        "author": "AbstractMelon",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/BiggerBlackHoles.png",
-        "description": "",
-        "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/tag/bigger-black-holes-v1.1.0"
-      },
-      {
-        "name": "Bopl Guns",
-        "author": "ShAdowDev16",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/GunsMod.png",
-        "description": "",
-        "github": "https://github.com/ShAdowDev16/BoplGuns"
-      },
-      {
-        "name": "Map Selector",
-        "author": "AbstractMelon and Mathlover3",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/MapSelector.png",
-        "description": "",
-        "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/tag/map-selector-v1.0.0"
-      },
-      {
-        "name": "No Clone Limit",
-        "author": "MathLover3",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/NoCloneLimit.png",
-        "description": "",
-        "github": "https://github.com/mathlover3/bopl-battle-mods/releases/tag/NoCloneLimit"
-      },
-      {
-        "name": "Almighty Push",
-        "author": "Really Bad Dev",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/Almighty_Push.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Any Color",
-        "author": "David",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/AnyColor.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Arrow Circle",
-        "author": "Breh",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/ArrowCircle.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Guns Mod",
-        "author": "ShAdowDev16",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/GunsMod.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Infinite Platform Size",
-        "author": "Diggity",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/InfinitePlatformSize.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Instant Cooldowns",
-        "author": "AbstractMelon",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/InstantCooldowns.jpg",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Low Gravity",
-        "author": "Master Oogway",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/LowGravity.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "No Spike Disappear",
-        "author": "R4aina",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/NoSpikeDisappear.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Same Color",
-        "author": "David",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/SameColor.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Spectator Mode",
-        "author": "Diggity",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/SpectatorMode.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Speedy Player",
-        "author": "Master Oogway",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/SpeedyPlayer.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Time Stop Timer",
-        "author": "Antimality",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/TimeStopTimer.png",
-        "description": "",
-        "github": ""
-      },
-      {
-        "name": "Demo Mod",
-        "author": "Melon",
-        "img": "https://raw.githubusercontent.com/AbstractMelon/BorplModManager/main/assets/images/TimeStopTimer.png",
-        "description": "",
-        "github": ""
-      }
-    ]
-  }
-  
+  "mods": [
+    {
+      "name": "Ability Storm",
+      "author": "unluckycrafter",
+      "img": "AbilityStorm.png",
+      "description": "Ability Storm is a mod made by Unluckycrafter that spawns ability orbs at random positions. It also randomly picks which slot to put the ability orb into.",
+      "github": "https://github.com/minidogg/myboplmods/releases/download/abilityStorm1.4/AbilityStorm.dll"
+    },
+    {
+      "name": "Anti-Squish",
+      "author": "zbuzzard",
+      "img": "AntiSquish.png",
+      "description": "prevents player from being squished",
+      "github": "https://github.com/zbuzzard/Bopl-Battle-Mods/releases/download/anti-squish-1.1.0/AnitSquish.dll"
+    },
+    {
+      "name": "Arrow Wall",
+      "author": "WackyModer",
+      "img": "ArrowWallIcon.jpg",
+      "description": "",
+      "github": "https://github.com/WackyModer/Bopl_Mods/releases/download/ArrowWall/arrowWall.dll"
+    },
+    {
+      "name": "Bigger Black Holes",
+      "author": "AbstractMelon",
+      "img": "BiggerBlackHoles.png",
+      "description": "Makes black hole have way too much power and instantly grow to max size and instakill everyone",
+      "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/download/bigger-black-holes-v1.1.0/BiggerBlackHoles.dll"
+    },
+    {
+      "name": "Map Selector",
+      "author": "AbstractMelon and Mathlover3",
+      "img": "MapSelector.png",
+      "description": "Allows you to select your own maps! Only the host has to use the mod and the mod will only work if the host is using it. TO BECOME THE HOST, BE THE PLAYER EVERYONE JOINS! Website for map id’s here: https://abstractmelon.github.io/MapPicker/website/index.html If you do the same map twice the game can lag",
+      "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/download/map-selector-v1.0.0/MapPicker.dll"
+    },
+    {
+      "name": "No Clone Limit",
+      "author": "MathLover3",
+      "img": "NoCloneLimit.png",
+      "description": "Removes Limit to Clones",
+      "github": "https://github.com/mathlover3/bopl-battle-mods/releases/download/NoCloneLimit/NoCloneLimit.dll"
+    },
+    {
+      "name": "Almighty Push",
+      "author": "Really Bad Dev",
+      "img": "Almighty_Push.png",
+      "description": "Makes gust more powerful.",
+      "github": "https://github.com/ReallyBadDeveloper/MyBoplBattleMods/releases/download/almightypush1.0.0/AlmightyPush.dll"
+    },
+    {
+      "name": "Any Color",
+      "author": "David",
+      "img": "AnyColor.png",
+      "description": "Allows you to steal a color if you are the host. note it only works if you are host",
+      "github": "https://github.com/mathlover3/bopl-battle-mods/releases/download/AnyColor/AnyColor.dll"
+    },
+    {
+      "name": "Arrow Circle",
+      "author": "Breh",
+      "img": "ArrowCircle.png",
+      "description": "It's a modified version of Wackymoder's \"arrowWall\" were the arrows get shot around you in a circle instead of a line",
+      "github": "https://github.com/Breuhh/arrowCircle/raw/main/arrowCircle.dll"
+    },
+    {
+      "name": "Guns Mod",
+      "author": "ShAdowDev16",
+      "img": "GunsMod.png",
+      "description": "Yes, I think you have all been waiting for this... GUNS Also you can create your own guns (documentation on GitHub)",
+      "github": "https://github.com/ShAdowDev16/BoplGuns/releases/download/Releases/BoplGuns.zip"
+    },
+    {
+      "name": "Infinite Platform Size",
+      "author": "Diggity",
+      "img": "InfinitePlatformSize.png",
+      "description": "Infinite Platfromability Size, removes the limit of how big your platform can be.",
+      "github": "https://github.com/000Diggity000/Infinite-Platformability-Size/releases/download/BoplBattle/InfinitePlatformabilitySize.dll"
+    },
+    {
+      "name": "Instant Cooldowns",
+      "author": "Mangochicken",
+      "img": "InstantCooldowns.jpg",
+      "description": "Makes abilities have 1/3 of the cooldown they normally have. Fixed incompatiblities :)",
+      "github": "https://github.com/AbstractMelon/BoplBattleMods/releases/download/slight-cooldowns-v1.1.0/SlightCooldowns.dll"
+    },
+    {
+      "name": "Low Gravity",
+      "author": "Master Oogway",
+      "img": "LowGravity.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "No Spike Disappear",
+      "author": "R4aina",
+      "img": "NoSpikeDisappear.png",
+      "description": "Previous spikes dont disappear after placing new one",
+      "github": "https://github.com/TheRa4ina/BoplNoSpikeDisappear/raw/master/NoSpikeDisappear.dll"
+    },
+    {
+      "name": "Same Color",
+      "author": "David",
+      "img": "SameColor.png",
+      "description": "if you are the host and have this mod then everyone will become the same color as you when the game starts. nice if someone is targeting someone or you just want people to get confused who they are",
+      "github": "https://github.com/mathlover3/bopl-battle-mods/releases/download/SameColor/SameColor.dll"
+    },
+    {
+      "name": "Spectator Mode",
+      "author": "Diggity",
+      "img": "SpectatorMode.png",
+      "description": "Press 1 on your keyboard to enter spectator mode!",
+      "github": "https://github.com/000Diggity000/SpectatorMode/releases/download/bopl/SpectatorMode.dll"
+    },
+    {
+      "name": "Speedy Player",
+      "author": "Master Oogway",
+      "img": "SpeedyPlayer.png",
+      "description": "",
+      "github": ""
+    },
+    {
+      "name": "Time Stop Timer",
+      "author": "Antimality",
+      "img": "TimeStopTimer.png",
+      "description": "Shows a timer displaying how long it takes until the time freezes or unfreezes",
+      "github": "https://github.com/Antimality/MyBoplMods/releases/download/TimeStopTimer-v1.0.0/TimeStopTimer.dll"
+    }
+  ]
+}
