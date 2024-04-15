@@ -1,15 +1,16 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Lexend, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #444444;
 }
 
 header {
-    background-color: #1d1d1d;
+    background-color: #333;
     color: #fff;
     padding: 10px;
     text-align: center;
+    -webkit-app-region: drag;
 }
 
 header h1 p {
@@ -51,6 +52,7 @@ button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-family: Lexend, Arial, sans-serif;
 }
 
 input[type="text"],
@@ -116,4 +118,10 @@ button#saveSettingsBtn:hover {
 
 .configuration-section input[type="checkbox"] {
     margin-right: 5px; 
+}
+
+#menuButton {
+    position: absolute;
+    bottom: 12.5px;
+    right: 12.5px;
 }

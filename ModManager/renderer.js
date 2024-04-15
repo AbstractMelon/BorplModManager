@@ -1,6 +1,13 @@
 const { ipcRenderer } = require('electron');
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.location === "splash.html") {
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.on('quote', (event, quote) => {
+            const quoteElement = document.getElementById('quote');
+            quoteElement.innerText = `"${quote}"`;
+        });
+    }
     const fetchModsBtn = document.getElementById('fetchModsBtn');
     const installSplotchBtn = document.getElementById('installSplotchBtn');
     const modContainer = document.getElementById('modContainer');
@@ -16,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     installSplotchBtn.addEventListener('click', () => {
         ipcRenderer.send('install-splotch');
+    });
+
+    document.getElementById('browseBtn').addEventListener('click', async () => {
+        const gameDir = await ipcRenderer.invoke('select-game-directory');
+        console.log('Selected game directory:', gameDir);
     });
 
     // Epic mod text
@@ -36,13 +48,39 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             modContainer.appendChild(modCard);
         });
-    }
     
-    // Listen for install-mod event
-    modContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('installModBtn')) {
-            const modUrl = event.target.getAttribute('data-url');
-            ipcRenderer.send('install-mod', modUrl);
+        const installModBtns = document.querySelectorAll('.installModBtn');
+        installModBtns.forEach((btn) => {
+            btn.addEventListener('click', (event) => {
+                const modUrl = event.target.getAttribute('data-url');
+                ipcRenderer.send('install-mod', modUrl);
+            });
+        });
+    }
+
+    // SETTINGS!
+    document.addEventListener('DOMContentLoaded', () => {
+        const consoleEnabledCheckbox = document.getElementById('consoleEnabled');
+        const verboseLoggingCheckbox = document.getElementById('verboseLogging');
+        const nightlyCheckbox = document.getElementById('nightly');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+    
+        // Populate settings UI when the page loads
+        const settings = readSettings();
+        if (settings) {
+            consoleEnabledCheckbox.checked = settings.consoleEnabled;
+            verboseLoggingCheckbox.checked = settings.verboseLoggingEnabled;
+            nightlyCheckbox.checked = settings.nightly;
         }
+    
+        // Save settings when the "Save Settings" button is clicked
+        saveSettingsBtn.addEventListener('click', () => {
+            const newSettings = {
+                consoleEnabled: consoleEnabledCheckbox.checked,
+                verboseLoggingEnabled: verboseLoggingCheckbox.checked,
+                nightly: nightlyCheckbox.checked
+            };
+            saveSettings(newSettings);
+        });
     });
 });

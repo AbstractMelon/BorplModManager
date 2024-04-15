@@ -1,0 +1,31 @@
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    font-family: Lexend, Arial, sans-serif;
+    -webkit-app-region: drag;
+}
+
+body:active {
+    cursor: none;
+}
+
+.container {
+    border-radius: 10px;
+    background: black;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container:active {
+    cursor: none;
+}
+
+.content {
+    align-items: center;
+    text-align: center;
+}
