@@ -85,14 +85,20 @@ async function installSplotch(gameDir) {
     }
 }
 
-async function installMod(modUrl, userDir) {
+async function installMod(modUrl) {
     const modDir1 = getModDirectory();
-    const modDir2 = modDir1.join(userDir, '/Bepinex/plugins/');
-    try {
-        if (!fs.existsSync(modDir2)) {
-            fs.mkdirSync(modDir2);
-        }
+    const modDir2 = modDir1;
 
+    console.log('Mod dir 1:', modDir1)
+    console.log('Mod dir 2:', modDir2)
+    
+    console.log('Mod URL:', modUrl)
+
+    try{
+        if (!fs.existsSync(modDir2)) {
+            fs.mkdirSync(modDir2, { recursive: true });
+        }
+    
         const modFileName = path.basename(modUrl);
         const modFilePath = path.join(modDir2, modFileName);
 
@@ -258,7 +264,7 @@ app.whenReady().then(() => {
                 const mods = response.data.mods;
 
                 // Log the fetched JSON data
-                console.log('Fetched mods:', mods);
+                console.log('Fetched mods');
 
                 return mods;
             } catch (error) {
@@ -285,7 +291,7 @@ app.whenReady().then(() => {
                     title: "Close Bopl Battle!",
                     body: "Please close Bopl Battle manually.",
                   }).show()
-                runBoplBattleAndKill(modDir, 5);
+                // runBoplBattleAndKill(modDir, 5);
                 console.log('Bepinex installed successfully.');
             } catch (error) {
                 console.error('Error installing Bepinex:', error);
@@ -298,6 +304,7 @@ app.whenReady().then(() => {
         });
         
         ipcMain.on('install-mod', async (event, modUrl) => {
+            console.log("Mod URL received:", modUrl);
             const modDir = getModDirectory();
             try {
                 await installMod(modUrl, modDir);
@@ -305,13 +312,14 @@ app.whenReady().then(() => {
                 console.log('Mod installed successfully.');
                 new Notification({
                     title: "Mod installed!",
-                    body: "mod " + modUrl +  ", has installed successfully.",
-                  }).show()
+                    body: "Mod " + modUrl +  ", has installed successfully.",
+                }).show()
             } catch (error) {
                 console.error('Error installing mod:', error);
                 event.reply('mod-install-error', error.message);
             }
         });
+        
 
         ipcMain.handle('select-game-directory', async () => {
             const result = await dialog.showOpenDialog({

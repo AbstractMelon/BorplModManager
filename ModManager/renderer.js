@@ -48,16 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             modContainer.appendChild(modCard);
         });
-    }
     
-    // Listen for install-mod event
-    modContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('installModBtn')) {
-            const modUrl = event.target.getAttribute('data-url');
-            ipcRenderer.send('install-mod', modUrl);
-        }
-    });
-
+        const installModBtns = document.querySelectorAll('.installModBtn');
+        installModBtns.forEach((btn) => {
+            btn.addEventListener('click', (event) => {
+                const modUrl = event.target.getAttribute('data-url');
+                ipcRenderer.send('install-mod', modUrl);
+            });
+        });
+    }
 
     // SETTINGS!
     document.addEventListener('DOMContentLoaded', () => {
